@@ -307,7 +307,18 @@ console.log(data);
         rooms[room][1].isTurn=false;
         rooms[room][2].isTurn=false;
         rooms[room][3].isTurn=false;
+        if(rooms[room][highestCardPlayerIndex].cardsCount>0){
         rooms[room][highestCardPlayerIndex].isTurn=true;
+        }
+        else if(rooms[room][(highestCardPlayerIndex+1)%4].cardsCount>0){
+        rooms[room][(highestCardPlayerIndex+1)%4].isTurn=true;
+        }
+        else if(rooms[room][(highestCardPlayerIndex+2)%4].cardsCount>0){
+        rooms[room][(highestCardPlayerIndex+2)%4].isTurn=true;
+        }
+        else if(rooms[room][(highestCardPlayerIndex+3)%4].cardsCount>0){
+        rooms[room][(highestCardPlayerIndex+3)%4].isTurn=true;
+        }
 
         //send updated players to players
         io.to(room).emit("update_players", rooms[room]);
